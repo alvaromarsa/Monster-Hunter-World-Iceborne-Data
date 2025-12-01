@@ -1,0 +1,39 @@
+<div class="p-4 bg-gray-900 min-h-screen text-white">
+      <h1 class="text-4xl font-bold mb-6 text-yellow-500">Guía de armas Iceborne</h1>
+
+      <weapons-select/>
+
+      @for( weapon of weaponsData$ | async; track weapon.id ){
+        <div class="mb-8 p-6 bg-gray-800 rounded-lg shadow-lg">
+          <h2 class="text-2xl font-semibold mb-4 text-yellow-400">{{ weapon.name }}</h2>
+          @if (weapon.assets && weapon.assets.icon) {
+            <img src="{{ weapon.assets.icon }}">
+          }@else {
+            <p class="mb-2">No hay icono disponible</p>
+          }
+
+          <p class="mb-2"><strong>Tipo:</strong> {{ weapon.type }}</p>
+          <p class="mb-2"><strong>Rareza:</strong> {{ weapon.rarity }}</p>
+          <p class="mb-2"><strong>Ataque:</strong> {{ weapon.attack.display }}</p>
+          <p class="mb-2"><strong>Afinidad:</strong> {{ weapon.attributes?.affinity ?? 0 }} %</p>
+          <p class="mb-2"><strong>Elemento:</strong>
+            @for(element of weapon.elements; track element.type) {
+              {{element.damage}}-{{element.type}}
+            }@empty {
+              <p>No tiene elemento</p>
+            }
+          <p class="mb-2"><strong>Imagen</strong></p>
+          @if (weapon.assets && weapon.assets.image) {
+            <img src="{{ weapon.assets.image }}">
+          }@else {
+            <p class="mb-2">No hay imagen disponible</p>
+          }
+
+        </div>
+      }@empty {
+        <!-- Bloque para mostrar mientras se cargan los datos -->
+        <div class="text-center p-10 text-gray-500">
+            Preguntando al herrero...
+        </div>
+        }
+</div>

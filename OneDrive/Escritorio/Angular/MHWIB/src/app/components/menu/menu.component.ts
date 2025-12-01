@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 
 @Component({
-  selector: 'menuComponent',
+  selector: 'menu-component',
   standalone: true,
   imports: [],
   templateUrl: './menu.component.html',
