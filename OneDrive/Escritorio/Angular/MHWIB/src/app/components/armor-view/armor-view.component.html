@@ -1,45 +1,66 @@
 <div class="p-4 bg-gray-900 min-h-screen text-white">
       <h1 class="text-4xl font-bold mb-6 text-yellow-500">Guía de armaduras Iceborne</h1>
 
-      @for( armor of armorData$ | async; track armor.id ){
-        <div class="mb-8 p-6 bg-gray-800 rounded-lg shadow-lg">
-          <div class="flex flex-wrap items-center">
-            <div class="w-full md:w-1/2">
-              <h2 class="text-2xl font-semibold mb-4 text-yellow-400">{{ armor.name }}</h2>
-              <p class="mb-2"><strong>Tipo:</strong> {{ armor.type }}</p>
-              <p class="mb-2"><strong>Rango:</strong> {{ armor.rank }}</p>
-              <p class="mb-2"><strong>Rareza:</strong> {{ armor.rarity }}</p>
-              <p class="mb-2"><strong>Defensa:</strong> {{ armor.defense.base }}</p>
-              <p class="mb-2"><strong>Resistencia al draco: 🐲</strong> {{ armor.resistances.dragon }}</p>
-              <p class="mb-2"><strong>Resistencia al fuego: 🔥</strong> {{ armor.resistances.fire }}</p>
-              <p class="mb-2"><strong>Resistencia al hielo: ❄️</strong> {{ armor.resistances.ice }}</p>
-              <p class="mb-2"><strong>Resistencia al agua: 💧</strong> {{ armor.resistances.water }}</p>
-              <p class="mb-2"><strong>Resistencia al rayo: ⚡</strong> {{ armor.resistances.thunder }}</p>
+      @if (armorData$ | async; as armors) {
+
+
+        @for( armor of (armors | slice: (currentPage - 1) * pageSize : currentPage * pageSize); track armor.id ){
+          <div class="mb-8 p-6 bg-gray-800 rounded-lg shadow-lg">
+            <div class="flex flex-wrap items-center">
+              <div class="w-full md:w-1/2">
+                <h2 class="text-2xl font-semibold mb-4 text-yellow-400">{{ armor.name | translateArmor }}</h2>
+                <p class="mb-2"><strong>Tipo:</strong> {{ armor.type | translateArmor }}</p>
+                <p class="mb-2"><strong>Rango:</strong> {{ armor.rank  | translateArmor}}</p>
+                <p class="mb-2"><strong>Rareza:</strong> {{ armor.rarity }}</p>
+                <p class="mb-2"><strong>Defensa:</strong> {{ armor.defense.base }}</p>
+                <p class="mb-2"><strong>Resistencia al draco: 🐲</strong> {{ armor.resistances.dragon }}</p>
+                <p class="mb-2"><strong>Resistencia al fuego: 🔥</strong> {{ armor.resistances.fire }}</p>
+                <p class="mb-2"><strong>Resistencia al hielo: ❄️</strong> {{ armor.resistances.ice }}</p>
+                <p class="mb-2"><strong>Resistencia al agua: 💧</strong> {{ armor.resistances.water }}</p>
+                <p class="mb-2"><strong>Resistencia al rayo: ⚡</strong> {{ armor.resistances.thunder }}</p>
+              </div>
+              <div class="w-full md:w-1/2 flex justify-center items-center p-4">
+                @if (armor.assets && armor.assets.imageMale) {
+                  <img src="{{ armor.assets.imageMale }}" class="h-auto w-[350px] drop-shadow-[0_0_15px_rgba(255,255,0,0.3)] transform hover:scale-105 transition-all">
+                }@else {
+                  <p class="mb-2">No hay imagen disponible</p>
+                }
+              </div>
             </div>
-            <div class="w-full md:w-1/2 flex justify-center items-center p-4">
-              @if (armor.assets && armor.assets.imageMale) {
-                <img src="{{ armor.assets.imageMale }}" class="h-auto w-[350px] drop-shadow-[0_0_15px_rgba(255,255,0,0.3)] transform hover:scale-105 transition-all">
-              }@else {
-                <p class="mb-2">No hay imagen disponible</p>
-              }
-            </div>
+              <div class="mt-6">
+                <h2 class="text-xl font-semibold border-b border-gray-700 pb-2 mb-3 text-red-400">Habilidades Proporcionadas</h2>
+                @for (skillsInfo of armor.skills; track skillsInfo.id) {
+                  <p class="mb-2"><strong>{{ skillsInfo.skillName }}</strong></p>
+                  <p class="mb-2"> {{  skillsInfo.description }}</p>
+                }@empty {
+                  <p class="mb-2"><strong>No tiene habilidades</strong></p>
+                }
+              </div>
           </div>
-            <div class="mt-6">
-              <h2 class="text-xl font-semibold border-b border-gray-700 pb-2 mb-3 text-red-400">Habilidades Proporcionadas</h2>
-              @for (skillsInfo of armor.skills; track skillsInfo.id) {
-                <p class="mb-2"><strong>{{ skillsInfo.skillName }}</strong></p>
-                <p class="mb-2"> {{  skillsInfo.description }}</p>
-              }@empty {
-                <p class="mb-2"><strong>No tiene habilidades</strong></p>
-              }
-            </div>
 
-
-        </div>
-      }@empty {
-        <!-- Bloque para mostrar mientras se cargan los datos -->
-        <div class="text-center p-10 text-gray-500">
-            Cargando sets de armadura...
-        </div>
         }
+         <div class="flex justify-center items-center gap-4 mt-8 pb-10">
+            <button
+              (click)="currentPage = currentPage - 1"
+              [disabled]="currentPage === 1"
+              class="px-6 py-2 bg-yellow-600 rounded-full disabled:opacity-30">
+              Anterior
+            </button>
+
+            <span class="text-xl">Página {{ currentPage }}</span>
+
+            <button
+              (click)="currentPage = currentPage + 1"
+              [disabled]="(currentPage * pageSize) >= armors.length"
+              class="px-6 py-2 bg-yellow-600 rounded-full disabled:opacity-30">
+              Siguiente
+            </button>
+          </div>
+      }@else {
+      <div class="text-center p-10 text-gray-500">
+          Conectando con la base de datos de cazadores...
+      </div>
+  }
+
+
 </div>

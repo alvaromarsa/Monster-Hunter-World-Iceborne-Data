@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { MonsterInterface } from '../interfaces/monster-interface';
 import { ArmorInterface } from '../interfaces/armor-interface';
 import { WeaponInterface } from '../interfaces/weapon-interface';
-import { map, Observable } from 'rxjs';
+import { map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,10 @@ export class DataService {
   private readonly DATA_URL = 'https://mhw-db.com';
 
   constructor(private http: HttpClient) { }
+
+  private weaponCache$?: Observable<WeaponInterface[]>;
+  private monsterCache$?: Observable<MonsterInterface[]>;
+  private armorCache$?: Observable<ArmorInterface[]>;
 
   getWeaponByType(type: string) : Observable<WeaponInterface[]> {
 
@@ -46,17 +50,49 @@ export class DataService {
   }
 
   getWeapons() {
-    return this.http.get<WeaponInterface[]>(`${this.DATA_URL}/weapons`);
+    //return this.http.get<WeaponInterface[]>(`${this.DATA_URL}/weapons`);
+    if (!this.weaponCache$) {
+
+      console.log('Vamos a pedir los datos de armas a la API');
+      this.weaponCache$ = this.http.get<WeaponInterface[]>(`${this.DATA_URL}/weapons`).pipe(
+        shareReplay(1)
+      );
+    }else {
+      console.log('Recuperando las armas del caché');
+    }
+     return this.weaponCache$;
   }
 
   getMonsters() {
 
-    return this.http.get<MonsterInterface[]>(`${this.DATA_URL}/monsters`);
+     if (!this.monsterCache$) {
+
+      console.log('Vamos a pedir los datos de monstruos a la API');
+      this.monsterCache$ = this.http.get<MonsterInterface[]>(`${this.DATA_URL}/monsters`).pipe(
+        shareReplay(1)
+      );
+    }else {
+      console.log('Recuperando los monstruos del caché');
+    }
+     return this.monsterCache$;
 
   }
 
+
+
   getArmor() {
-    return this.http.get<ArmorInterface[]>(`${this.DATA_URL}/armor`);
+
+    if (!this.armorCache$) {
+
+      console.log('Vamos a pedir los datos de armaduras a la API');
+      this.armorCache$ = this.http.get<ArmorInterface[]>(`${this.DATA_URL}/armor`).pipe(
+        shareReplay(1)
+      );
+    }else {
+      console.log('Recuperando las armaduras del caché');
+    }
+     return this.armorCache$;
+
   }
 
 }
