@@ -1,8 +1,28 @@
 <div class="p-4 bg-gray-900 min-h-screen text-white">
       <h1 class="text-4xl font-bold mb-6 text-yellow-500">Guía de armas Iceborne</h1>
 
-      <weapons-select/>
+      <!--iconos de seleccion de tipo de arma-->
+      <weapons-select
+        [weapontypes]="(weaponsIcons$ | async) ?? []"
+        (typeSelected)="onTypeSelected($event)"
+      />
+      <!--si hay un tipo seleccionado y un id seleccionado, mostramos el detalle del arma-->
+      @if(hasSelectedType && hasSelectedId) {
+        <weapon-description
+          [weapon]="selectedWeapon$()"
+          (back)="volverAlGrid()"
+        />
+      }
+        @else if(hasSelectedType ) {
+        <!--listado de armas por tipo-->
+        <weapon-grid
+          [weapons]="(weaponsData$ | async) ?? []"
+          (weaponSelected)="onWeaponSelected($event)"
+        />
+      }
 
+
+<!--
       @for( weapon of weaponsData$ | async; track weapon.id ){
         <div class="mb-8 p-6 bg-gray-800 rounded-lg shadow-lg">
           <h2 class="text-2xl font-semibold mb-4 text-yellow-400">{{ weapon.name }}</h2>
@@ -31,9 +51,10 @@
 
         </div>
       }@empty {
-        <!-- Bloque para mostrar mientras se cargan los datos -->
+         Bloque para mostrar mientras se cargan los datos
         <div class="text-center p-10 text-gray-500">
             Preguntando al herrero...
         </div>
         }
+        -->
 </div>

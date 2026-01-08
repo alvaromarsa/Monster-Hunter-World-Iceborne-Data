@@ -1,1 +1,25 @@
-<p>weapons-select works!</p>,
+<div class="p-4 bg-gray-900 rounded-xl shadow-inner">
+  <!-- Sección de filtro por tipo de arma -->
+  <div class="flex flex-wrap justify-center gap-2 mb-6 p-4 bg-gray-700 rounded-xl shadow-inner">
+    <h3 class="w-full text-center text-xl font-bold mb-3 text-yellow-300">Filtrar por Tipo de Arma</h3>
+
+    @for (wType of weapontypes(); track wType.type) {
+      <button
+        (click)="onSelectType(wType.type)"
+        [title]="wType.type | titlecase"
+        [ngClass]="{
+          'bg-yellow-600 ring-2 ring-yellow-400': selectedType() === wType.type,
+          'bg-gray-600 hover:bg-gray-500': selectedType() !== wType.type
+        }"
+        class="p-1.5 md:p-2 rounded-xl transition duration-150 transform hover:scale-105 border-2 border-transparent"
+      >
+        <img
+          [src]="wType.icon"
+          [alt]="wType.type | titlecase"
+          class="w-8 h-8 object-contain"
+        >
+      </button>
+    }
+  </div>
+
+</div>

@@ -1,0 +1,53 @@
+<div class="animate-in slide-in-from-bottom duration-500 max-w-4xl mx-auto">
+
+      <!-- Botón Volver -->
+      <button
+        (click)="back.emit()"
+        class="mb-6 flex items-center text-yellow-500 hover:text-yellow-400 font-bold transition-colors"
+      >
+        <span class="mr-2">←</span> Volver al listado
+      </button>
+
+      <!-- Ficha del Arma -->
+      <div class="bg-gray-800 rounded-3xl p-8 border-2 border-yellow-600 shadow-2xl">
+        <div class="flex flex-col md:flex-row gap-8">
+
+          <div class="flex-1">
+            <h2 class="text-4xl font-bold text-yellow-400 mb-2">{{ weapon()?.name}}</h2>
+            <p class="text-gray-400 uppercase tracking-widest text-sm mb-6">
+              {{ weapon()?.type }} - Rareza {{ weapon()?.rarity }}
+            </p>
+
+            <div class="grid grid-cols-2 gap-4 bg-gray-900/50 p-6 rounded-2xl border border-gray-700">
+              <div>
+                <span class="block text-gray-500 text-xs uppercase">Ataque</span>
+                <span class="text-2xl font-bold text-red-500">{{ weapon()?.attack?.display }}</span>
+              </div>
+              @if( weapon()?.attributes?.affinity ) {
+              <div>
+                <span class="block text-gray-500 text-xs uppercase">Afinidad</span>
+                <span class="text-2xl font-bold text-green-500">{{ weapon()?.attributes?.affinity }}%</span>
+              </div>
+            }
+              <div class="col-span-2">
+                <span class="block text-gray-500 text-xs uppercase">Elemento</span>
+                @for (el of weapon()?.elements; track el.type) {
+                  <span class="text-xl font-bold text-blue-400">{{ el.damage }} {{ el.type | titlecase }}</span>
+                } @empty {
+                  <span class="text-xl font-bold text-gray-600">Ninguno</span>
+                }
+              </div>
+            </div>
+          </div>
+
+          <!-- Imagen 3D -->
+          <div class="flex-1 flex items-center justify-center bg-gray-900 rounded-2xl p-4 border border-gray-700">
+            @if (weapon()?.assets?.image) {
+              <img [src]="weapon()?.assets?.image" class="max-h-64 object-contain" alt="Vista 3D">
+            } @else {
+              <p class="text-gray-600 italic">No hay imagen disponible en la forja</p>
+            }
+          </div>
+        </div>
+      </div>
+    </div>

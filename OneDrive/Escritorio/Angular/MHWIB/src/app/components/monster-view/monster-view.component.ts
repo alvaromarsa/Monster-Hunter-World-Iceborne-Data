@@ -21,9 +21,5 @@ export class MonsterViewComponent implements OnInit {
   public ngOnInit(): void {
     this.monsterData$ = this.DataService.getMonsters();
   }
-/*
-  public getMonsterById(id:number): MonsterInterface {
 
-    return
- }*/
 }

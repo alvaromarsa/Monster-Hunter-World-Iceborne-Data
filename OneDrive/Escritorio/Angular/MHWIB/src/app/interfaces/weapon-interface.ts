@@ -46,9 +46,14 @@ export interface Sharpness {
 }
 
 export interface AssetsImage {
-  icon: string;
+  icon?: string;
   image: string;
 
+}
+
+export interface WeaponTypeFilter {
+  type: string; // Ej: 'great-sword'
+  icon: string; // URL del icono
 }
 
 
