@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { MonsterInterface } from '../interfaces/monster-interface';
 import { ArmorInterface } from '../interfaces/armor-interface';
 import { WeaponInterface } from '../interfaces/weapon-interface';
@@ -10,7 +10,7 @@ import { map, Observable, shareReplay } from 'rxjs';
 })
 export class DataService {
 
-  private readonly DATA_URL = 'https://mhw-db.com';
+  //private readonly DATA_URL = 'https://mhw-db.com';
 
   constructor(private http: HttpClient) { }
 
@@ -18,14 +18,35 @@ export class DataService {
   private monsterCache$?: Observable<MonsterInterface[]>;
   private armorCache$?: Observable<ArmorInterface[]>;
 
+
+  private readonly weaponProjection = JSON.stringify({
+      id: true,
+      assets: { icon: true, image: true },
+      type: true,
+      name: true,
+      rarity: true,
+      attack: true,
+      elements: true,
+      attributes: true,
+      defense: true
+    });
+
+
   getWeaponByType(type: string) : Observable<WeaponInterface[]> {
 
-    return this.http.get<WeaponInterface[]>(`${this.DATA_URL}/weapons?q={"type":"${type}"}`);
+    const filtro = JSON.stringify({ type: type });
+    const params = new HttpParams()
+    .set('p', this.weaponProjection)
+    .set('q', filtro);
+
+    return this.http.get<WeaponInterface[]>(`/weapons`, {params});
   }
 
   getWeaponById(id: number) : Observable<WeaponInterface> {
 
-    return this.http.get<WeaponInterface[]>(`${this.DATA_URL}/weapons/${id}`).pipe(
+    const params = new HttpParams().set('p', this.weaponProjection);
+
+    return this.http.get<WeaponInterface[]>(`/weapons/${id}`, {params}).pipe(
     // 🪄 MAGIA: Cogemos el array y devolvemos solo el primer elemento [0]
     map(arrayDeArmas => arrayDeArmas[0])
     );
@@ -50,29 +71,34 @@ export class DataService {
   }
 
   getWeapons() {
-    //return this.http.get<WeaponInterface[]>(`${this.DATA_URL}/weapons`);
+
+    const params = new HttpParams().set('p', this.weaponProjection);
+
     if (!this.weaponCache$) {
 
-      console.log('Vamos a pedir los datos de armas a la API');
-      this.weaponCache$ = this.http.get<WeaponInterface[]>(`${this.DATA_URL}/weapons`).pipe(
+      this.weaponCache$ = this.http.get<WeaponInterface[]>(`/weapons`, {params}).pipe(
         shareReplay(1)
       );
-    }else {
-      console.log('Recuperando las armas del caché');
     }
      return this.weaponCache$;
   }
 
   getMonsters() {
 
+      const monsterProjection = JSON.stringify({
+      id: true,
+      type: true,
+      name: true,
+      species: true,
+      description: true,
+    });
+    const params = new HttpParams().set('p', monsterProjection);
+
      if (!this.monsterCache$) {
 
-      console.log('Vamos a pedir los datos de monstruos a la API');
-      this.monsterCache$ = this.http.get<MonsterInterface[]>(`${this.DATA_URL}/monsters`).pipe(
+      this.monsterCache$ = this.http.get<MonsterInterface[]>(`/monsters`, {params}).pipe(
         shareReplay(1)
       );
-    }else {
-      console.log('Recuperando los monstruos del caché');
     }
      return this.monsterCache$;
 
@@ -82,14 +108,24 @@ export class DataService {
 
   getArmor() {
 
+    const armorProjection = JSON.stringify({
+      id: true,
+      type: true,
+      name: true,
+      rarity: true,
+      rank: true,
+      resistances: true,
+      skills: true,
+      defense: true,
+      assets: true,
+    });
+    const params = new HttpParams().set('p', armorProjection);
+
     if (!this.armorCache$) {
 
-      console.log('Vamos a pedir los datos de armaduras a la API');
-      this.armorCache$ = this.http.get<ArmorInterface[]>(`${this.DATA_URL}/armor`).pipe(
+      this.armorCache$ = this.http.get<ArmorInterface[]>(`/armor`, {params}).pipe(
         shareReplay(1)
       );
-    }else {
-      console.log('Recuperando las armaduras del caché');
     }
      return this.armorCache$;
 

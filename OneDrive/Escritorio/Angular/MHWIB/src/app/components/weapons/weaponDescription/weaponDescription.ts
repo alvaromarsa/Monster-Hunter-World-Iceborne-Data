@@ -1,6 +1,6 @@
 import { Component, input, output } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
-import { WeaponInterface } from '../../interfaces/weapon-interface';
+import { WeaponInterface } from '../../../interfaces/weapon-interface';
 
 @Component({
   selector: 'weapon-description',

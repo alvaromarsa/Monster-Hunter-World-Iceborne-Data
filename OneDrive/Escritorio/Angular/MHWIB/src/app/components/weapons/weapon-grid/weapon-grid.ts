@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { WeaponInterface } from '../../interfaces/weapon-interface';
+import { WeaponInterface } from '../../../interfaces/weapon-interface';
 
 @Component({
   selector: 'weapon-grid',

@@ -18,9 +18,10 @@ export interface AffinityStats {
  * Define las ranuras de joya (sockets) del arma.
  * 'rank' es el tamaño de la ranura (1, 2, 3).
  */
+/*
 export interface WeaponSlot {
     rank: 1 | 2 | 3;
-}
+}*/
 
 /**
  * Define el daño elemental y si está sellado/oculto.
@@ -35,6 +36,7 @@ export interface ElementStats {
  * Define los medidores de afilado/nitidez (Sharpness) del arma.
  * Son arrays que representan los diferentes colores (rojo, naranja, amarillo, verde, azul, blanco, púrpura).
  */
+/*
 export interface Sharpness {
     red: number;
     orange: number;
@@ -43,7 +45,7 @@ export interface Sharpness {
     blue: number;
     white: number;
     purple: number;
-}
+}*/
 
 export interface AssetsImage {
   icon?: string;
@@ -68,16 +70,17 @@ export interface WeaponInterface {
     attributes?: AffinityStats; // Afinidad
     defense: number; // Bonus de defensa que da el arma (opcional)
     elements?: ElementStats[] | null; // Daño elemental (o null si es puramente físico)
-    slots: WeaponSlot[]; // Ranuras para joyas
-    sharpness: {
-        current: Sharpness; // Afilado actual
-        max: Sharpness; // Afilado máximo (con Handicraft)
-    };
+    assets?: AssetsImage;
+    //slots: WeaponSlot[]; // Ranuras para joyas
+    //sharpness: {
+    //    current: Sharpness; // Afilado actual
+    //    max: Sharpness; // Afilado máximo (con Handicraft)
+    //};
 
     // Opcional: para armas específicas como Bowguns
-    ammo?: any;
+    //ammo?: any;
 
     // Opcional: La API puede incluir un campo para el árbol de mejoras.
-    craftingInfo?: any;
-    assets?: AssetsImage;
+    //craftingInfo?: any;
+
 }

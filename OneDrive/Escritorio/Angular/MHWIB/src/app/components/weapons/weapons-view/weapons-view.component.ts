@@ -2,9 +2,9 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 
-import { DataService } from '../../services/data-service';
-import { WeaponInterface, WeaponTypeFilter } from '../../interfaces/weapon-interface';
-import { WeaponsSelect } from "../weapons-select/weapons-select";
+import { DataService } from '../../../services/data-service';
+import { WeaponInterface, WeaponTypeFilter } from '../../../interfaces/weapon-interface';
+import { WeaponsSelect } from '../weapons-icons/weapons-icons';
 import { WeaponGrid } from '../weapon-grid/weapon-grid';
 import { WeaponDescription } from '../weaponDescription/weaponDescription';
 
