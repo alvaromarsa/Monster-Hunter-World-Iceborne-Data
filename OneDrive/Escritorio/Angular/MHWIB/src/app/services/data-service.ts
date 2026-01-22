@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { map, Observable, shareReplay } from 'rxjs';
+
 import { MonsterInterface } from '../interfaces/monster-interface';
 import { ArmorInterface } from '../interfaces/armor-interface';
 import { WeaponInterface } from '../interfaces/weapon-interface';
-import { map, Observable, shareReplay } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -85,18 +87,9 @@ export class DataService {
 
   getMonsters() {
 
-      const monsterProjection = JSON.stringify({
-      id: true,
-      type: true,
-      name: true,
-      species: true,
-      description: true,
-    });
-    const params = new HttpParams().set('p', monsterProjection);
-
      if (!this.monsterCache$) {
 
-      this.monsterCache$ = this.http.get<MonsterInterface[]>(`/monsters`, {params}).pipe(
+      this.monsterCache$ = this.http.get<MonsterInterface[]>(`/monsters`).pipe(
         shareReplay(1)
       );
     }
@@ -129,6 +122,33 @@ export class DataService {
     }
      return this.armorCache$;
 
+  }
+
+  getArmorByRank(rank: string) : Observable<ArmorInterface[]> {
+
+    const filtro = JSON.stringify({ rank: rank });
+    const armorProjection = JSON.stringify({
+      id: true,
+      type: true,
+      name: true,
+      rarity: true,
+      rank: true,
+      resistances: true,
+      skills: true,
+      defense: true,
+      assets: true,
+    });
+    const params = new HttpParams()
+    .set('p', armorProjection)
+    .set('q', filtro);
+
+    if (!this.armorCache$) {
+
+      this.armorCache$ = this.http.get<ArmorInterface[]>(`/armor`, {params}).pipe(
+        shareReplay(1)
+      );
+    }
+     return this.armorCache$;
   }
 
 }
