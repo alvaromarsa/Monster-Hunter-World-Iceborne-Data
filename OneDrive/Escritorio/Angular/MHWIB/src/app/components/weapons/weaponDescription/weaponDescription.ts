@@ -1,11 +1,13 @@
 import { Component, input, output } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
+import { NgOptimizedImage } from '@angular/common';
+
 import { WeaponInterface } from '../../../interfaces/weapon-interface';
 
 @Component({
   selector: 'weapon-description',
   standalone: true,
-  imports: [TitleCasePipe],
+  imports: [TitleCasePipe, NgOptimizedImage],
   templateUrl: './weaponDescription.html',
 })
 export class WeaponDescription {

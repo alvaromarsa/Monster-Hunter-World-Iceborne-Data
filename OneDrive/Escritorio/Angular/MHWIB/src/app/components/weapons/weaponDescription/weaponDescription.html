@@ -42,8 +42,8 @@
 
           <!-- Imagen 3D -->
           <div class="flex-1 flex items-center justify-center bg-gray-900 rounded-2xl p-4 border border-gray-700">
-            @if (weapon()?.assets?.image) {
-              <img [src]="weapon()?.assets?.image" class="max-h-64 object-contain" alt="Vista 3D">
+            @if (weapon()?.assets?.image; as imageUrl) {
+              <img [ngSrc]="imageUrl" class="max-h-64 object-contain" width="400" height="400" alt="Mola el arma ee?">
             } @else {
               <p class="text-gray-600 italic">No hay imagen disponible en la forja</p>
             }

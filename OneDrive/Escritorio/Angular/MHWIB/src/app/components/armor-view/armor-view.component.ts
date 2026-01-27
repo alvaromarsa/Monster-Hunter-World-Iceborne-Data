@@ -41,4 +41,14 @@ export class ArmorViewComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  hayCambios: boolean = true;
+
+  puedeSalir(): boolean {
+    // Si hay cambios, devolvemos false para que el guard pregunte
+    if (this.hayCambios) {
+      return false;
+    }
+    return true;
+  }
+
 }
