@@ -1,25 +1,41 @@
 # 🟨 Monster Hunter App
 
-Aplicación web desarrollada con Angular para la visualización de datos relacionados con el universo de Monster Hunter. El proyecto consume una API externa y muestra información estructurada mediante componentes reutilizables y navegación entre vistas.
+Aplicación web desarrollada con Angular para la visualización de datos del universo Monster Hunter. El proyecto consume una API externa y permite explorar información estructurada mediante una interfaz dinámica basada en componentes y navegación por rutas.
 
 ---
 
 ## 🚀 Descripción
 
-Esta aplicación es una SPA (Single Page Application) construida con Angular que permite consultar y visualizar información de criaturas y elementos del universo Monster Hunter.
+Esta aplicación es una SPA (Single Page Application) desarrollada con Angular, cuyo objetivo es consultar y visualizar datos relacionados con Monster Hunter mediante consumo de una API REST.
 
-El proyecto se centra en la práctica de conceptos clave del desarrollo frontend moderno como el consumo de APIs, la gestión de datos asíncronos y la organización de una aplicación Angular por módulos y componentes.
+El proyecto está enfocado en la práctica de conceptos fundamentales y avanzados del ecosistema Angular, incluyendo arquitectura modular, manejo de datos asíncronos y buenas prácticas de escalabilidad.
 
 ---
 
 ## ⚙️ Funcionalidades
 
-- Consumo de API REST externa
-- Visualización dinámica de datos en la interfaz
+- Consumo de API REST externa para obtención de datos
+- Visualización dinámica de información en la interfaz
 - Navegación entre vistas mediante Angular Router
-- Estructura basada en componentes reutilizables
-- Manejo de estados de carga en peticiones HTTP
-- Separación de lógica mediante servicios Angular
+- Protección de rutas mediante Guards
+- Interceptores HTTP para gestión centralizada de peticiones
+- Uso de servicios para la lógica de negocio y comunicación con la API
+- Definición de interfaces TypeScript para tipado de datos
+- Manejo de estados de carga en peticiones asíncronas
+- Arquitectura basada en componentes reutilizables
+
+---
+
+## 🧱 Arquitectura del proyecto
+
+El proyecto sigue una arquitectura estructurada en capas:
+
+- **Componentes** → presentación de la interfaz de usuario
+- **Servicios** → gestión de llamadas HTTP y lógica de datos
+- **Guards** → protección de rutas y control de acceso
+- **Interceptors** → manejo global de peticiones HTTP
+- **Interfaces** → tipado de datos para asegurar consistencia
+- **Routing** → navegación entre vistas de la aplicación
 
 ---
 
@@ -33,39 +49,31 @@ El proyecto se centra en la práctica de conceptos clave del desarrollo frontend
 - RxJS
 - Angular Router
 - HttpClient
+- Angular Guards
+- HTTP Interceptors
 
 ---
 
-## 🧱 Arquitectura del proyecto
+## 🎯 Objetivo del proyecto
 
-El proyecto sigue una arquitectura estándar de Angular basada en:
-
-- **Componentes**: responsables de la interfaz de usuario
-- **Servicios**: gestión de llamadas a API y lógica de datos
-- **Routing**: navegación entre distintas vistas
-- **Observables (RxJS)**: manejo de datos asíncronos
-
----
-
-## 🎯 Objetivo
-
-Este proyecto tiene como objetivo reforzar conocimientos en Angular mediante:
+Este proyecto tiene como objetivo reforzar conocimientos en Angular aplicando patrones de desarrollo modernos, especialmente en:
 
 - Consumo de APIs REST
-- Manejo de datos asíncronos con RxJS
-- Uso de Angular Router para navegación
-- Estructuración de aplicaciones SPA
-- Organización de componentes reutilizables
+- Arquitectura modular en Angular
+- Uso de Guards para protección de rutas
+- Uso de Interceptors para control de peticiones HTTP
+- Tipado fuerte con TypeScript mediante interfaces
+- Separación de responsabilidades (componentes, servicios, lógica)
 
 ---
 
-## 🚀 Mejoras futuras
+## 🚀 Posibles mejoras futuras
 
-- Implementación de filtros de búsqueda
+- Implementación de filtros avanzados de búsqueda
 - Paginación de resultados
 - Mejora de diseño responsive
-- Optimización de rendimiento
-- Gestión de estado global
+- Gestión de estado global (NgRx o Signals)
+- Caché de peticiones HTTP para optimización de rendimiento
 
 ---
 
@@ -78,4 +86,4 @@ Frontend Developer (Angular)
 
 ## 📌 Nota
 
-Proyecto desarrollado con fines educativos para práctica de Angular y consumo de APIs REST.
+Proyecto desarrollado con fines educativos y de práctica en desarrollo frontend con Angular y consumo de APIs REST.
