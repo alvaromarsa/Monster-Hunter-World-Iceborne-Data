@@ -11,7 +11,7 @@ SPA desarrollada en Angular que permite explorar el universo de Monster Hunter m
 🖼️ Interfaz dinámica basada en datos reales de API
 
 🎬 Demo
-./docs/gifs/mhwib.gif
+![Demo](./docs/gifs/mhwib.gif)
 
 ---
 
@@ -31,15 +31,15 @@ SPA desarrollada en Angular que permite explorar el universo de Monster Hunter m
 
 Equipamiento:
 
-./docs/screenshots/gear.jpg
+![Equipamiento](./docs/screenshots/gear.jpg)
 
 Monstruos:
 
-./docs/screenshots/monster.jpg
+![Monstruos](./docs/screenshots/monster.jpg)
 
 Armas:
 
-./docs/screenshots/weapons.jpg
+![Armas](./docs/screenshots/weapons.jpg)
 
 ---
 
