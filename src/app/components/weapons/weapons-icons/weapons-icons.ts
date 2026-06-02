@@ -1,0 +1,33 @@
+import { Component, input, OnInit, output } from '@angular/core';
+import { NgClass, NgIf, NgFor, TitleCasePipe } from '@angular/common';
+
+import { WeaponInterface, WeaponTypeFilter } from '../../../interfaces/weapon-interface';
+
+@Component({
+  selector: 'weapons-select',
+  standalone: true,
+  imports: [NgClass, TitleCasePipe],
+  templateUrl: './weapons-icons.html',
+
+})
+export class WeaponsSelect implements OnInit {
+
+  // Input para tipos de arma (filtros por icono)
+  weapontypes = input<WeaponTypeFilter[]>([]);
+
+  // Input para el tipo seleccionado
+  selectedType = input<string>('');
+
+  // Output cuando se selecciona un tipo
+  typeSelected = output<string>();
+
+  onSelectType(type: string): void {
+    this.typeSelected.emit(type);
+    //this.isSelectedWeapon = true;
+  }
+
+  ngOnInit(): void {
+
+  }
+}
+

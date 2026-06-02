@@ -1,0 +1,40 @@
+<div class="p-4 bg-gray-900 min-h-screen text-white">
+      <h1 class="text-4xl font-bold mb-6 text-yellow-500">Guía de Monstruos Iceborne</h1>
+
+      @if (monsterData$ | async; as monsters) {
+
+        @for( monster of (monsters | slice: (currentPage - 1) * pageSize : currentPage * pageSize); track monster.id ){
+          <div class="mb-8 p-6 bg-gray-800 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold mb-4 text-yellow-400">{{ monster.name }}</h2>
+            <p class="mb-2"><strong>Tipo:</strong> {{ monster.type }}</p>
+            <p class="mb-2"><strong>Especie:</strong> {{ monster.species }}</p>
+            <p class="mb-2"><strong>Descripción:</strong> {{ monster.description }}</p>
+          </div>
+        }
+        @empty {
+          <!-- Bloque para mostrar mientras se cargan los datos -->
+          <div class="text-center p-10 text-gray-500">
+              Cargando monstruos...
+          </div>
+        }
+
+      <div class="flex justify-center items-center gap-4 mt-8 pb-10">
+            <button
+              (click)="currentPage = currentPage - 1"
+              [disabled]="currentPage === 1"
+              class="px-6 py-2 bg-yellow-600 rounded-full disabled:opacity-30">
+              Anterior
+            </button>
+
+            <span class="text-xl">Página {{ currentPage }}</span>
+
+            <button
+              (click)="currentPage = currentPage + 1"
+              [disabled]="(currentPage * pageSize) >= monsters.length"
+              class="px-6 py-2 bg-yellow-600 rounded-full disabled:opacity-30">
+              Siguiente
+            </button>
+          </div>
+    }
+
+</div>

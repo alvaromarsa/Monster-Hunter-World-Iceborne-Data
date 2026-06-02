@@ -1,14 +1,17 @@
 # 🟨 Monster Hunter App
 
-Aplicación web desarrollada con Angular para la visualización de datos del universo Monster Hunter. El proyecto consume una API externa y permite explorar información estructurada mediante una interfaz dinámica basada en componentes y navegación por rutas.
-
+SPA desarrollada en Angular que permite explorar el universo de Monster Hunter mediante consumo de API REST, con visualización interactiva de monstruos, armaduras y armas.
 ---
 
-## 🚀 Descripción
+## 🚀 Qué puedes hacer en la app
+🐲 Explorar monstruos con información detallada
+🛡️ Consultar armaduras con estadísticas y habilidades
+⚔️ Filtrar armas por tipo con visualización dinámica
+🧭 Navegar entre secciones protegidas con confirmación
+🖼️ Interfaz dinámica basada en datos reales de API
 
-Esta aplicación es una SPA (Single Page Application) desarrollada con Angular, cuyo objetivo es consultar y visualizar datos relacionados con Monster Hunter mediante consumo de una API REST.
-
-El proyecto está enfocado en la práctica de conceptos fundamentales y avanzados del ecosistema Angular, incluyendo arquitectura modular, manejo de datos asíncronos y buenas prácticas de escalabilidad.
+🎬 Demo
+./docs/gifs/mhwib.gif
 
 ---
 
@@ -24,13 +27,27 @@ El proyecto está enfocado en la práctica de conceptos fundamentales y avanzado
 - Manejo de estados de carga en peticiones asíncronas
 - Arquitectura basada en componentes reutilizables
 
+📸 Capturas
+
+Equipamiento:
+
+./docs/screenshots/gear.jpg
+
+Monstruos:
+
+./docs/screenshots/monster.jpg
+
+Armas:
+
+./docs/screenshots/weapons.jpg
+
 ---
 
 ## 🧱 Arquitectura del proyecto
 
 El proyecto sigue una arquitectura estructurada en capas:
 
-- **Componentes** → presentación de la interfaz de usuario
+- **Componentes** → capa de presentación reutilizable y desacoplada
 - **Servicios** → gestión de llamadas HTTP y lógica de datos
 - **Guards** → protección de rutas y control de acceso
 - **Interceptors** → manejo global de peticiones HTTP
